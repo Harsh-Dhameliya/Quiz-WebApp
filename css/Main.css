@@ -1,0 +1,113 @@
+@font-face {
+  font-family: "ancizar";
+  src: url(../Fonts/Ancizar_Sans/static/AncizarSans-Regular.ttf);
+}
+@font-face {
+  font-family: "ancizar";
+  src: url(../Fonts/Ancizar_Sans/static/AncizarSans-Bold.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "ancizar";
+  src: url(../Fonts/Ancizar_Sans/static/AncizarSans-Italic.ttf);
+  font-style: italic;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "ancizar", sans-serif;
+}
+body {
+  background-color: #f4f0e0;
+  cursor: url(../img/disability-q-krbilol3ttk5gtd1wfvlvl.png) , auto;
+  /* cursor: pointer; */
+}
+.nav-container {
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  gap: 0.5rem;
+  padding: 1rem 0 0.1rem 0;
+}
+.navbar {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  color: #fff;
+  /* padding: 0.9rem 0; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* margin: 1rem 0; */
+}
+.logo-box {
+  width: 50px;
+  height: 100%;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* padding: 2rem 1rem; */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+.elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo {
+  color: black;
+  /* margin: 0 1rem ; */
+  /* font-size: 1.5rem; */
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+  margin: 12px;
+}
+.navbar-content h3 {
+  color: #51504b;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-self: start;
+  align-items: center;
+  margin: 0 0.5rem;
+}
+.welcome-message {
+  color: #51504b;
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+}
+.sidebar {
+  width: 50px;
+  margin: 10px 0 10px 0;
+  height: 80vh;
+  /* display: block; */
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* padding: 2rem 1rem; */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  gap: 1rem;
+}
+.sidebar-link img {
+  width: 25px;
+  height: 25px;
+}
+.body-container {
+  width: 92.61%;
+  /* overflow-y:; */
+}
