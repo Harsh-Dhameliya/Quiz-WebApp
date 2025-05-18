@@ -1,442 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f7f8fa;
-      color: #232323;
-    }
-    .container {
-      display: flex;
-      min-height: 100vh;
-    }
-    /* Sidebar */
-    .sidebar {
-      width: 220px;
-      background: #fff;
-      box-shadow: 2px 0 16px #e9e9e9;
-      display: flex;
-      flex-direction: column;
-      padding: 32px 0 16px 0;
-      align-items: center;
-    }
-    .sidebar .logo {
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .sidebar nav {
-      width: 100%;
-      flex: 1;
-    }
-    .sidebar nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .sidebar nav ul li {
-      padding: 14px 0 14px 40px;
-      font-size: 1rem;
-      color: #555;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: background 0.2s;
-    }
-    .sidebar nav ul li.active, .sidebar nav ul li:hover {
-      background: #f5f6fa;
-      color: #ff7e5f;
-      font-weight: 600;
-      border-left: 3px solid #ff7e5f;
-    }
-    .sidebar .user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 40px;
-      padding-left: 20px;
-      width: 100%;
-    }
-    .sidebar .user-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #e0e7ef;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #555;
-    }
-    /* Main Content */
-    .main {
-      flex: 1;
-      padding: 40px 40px 0 40px;
-      display: flex;
-      flex-direction: column;
-      background: #f7f8fa;
-    }
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .top-bar button {
-      padding: 10px 28px;
-      border-radius: 10px;
-      border: none;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      background: #fff;
-      color: #232323;
-      box-shadow: 0 2px 8px #ececec;
-      transition: background 0.2s;
-    }
-    .top-bar button:last-child {
-      background: #23223a;
-      color: #fff;
-      margin-left: 8px;
-    }
-    .top-bar .avatars {
-      display: flex;
-      align-items: center;
-      gap: -10px;
-      margin-left: 12px;
-    }
-    .top-bar .avatars img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      margin-left: -10px;
-      background: #ffe0e0;
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      margin-bottom: 32px;
-    }
-    .profile-pic {
-      width: 110px;
-      height: 110px;
-      border-radius: 24px;
-      background: #e0e7ef;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      position: relative;
-    }
-    .profile-pic .badge {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #fff3e0;
-      border-radius: 50%;
-      padding: 8px;
-      box-shadow: 0 2px 8px #f8e1c0;
-      font-size: 1.2rem;
-    }
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .profile-info h2 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    .profile-info .subtitle {
-      color: #b0b0b0;
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    .xp-bar {
-      margin-top: 10px;
-      width: 340px;
-      height: 8px;
-      background: #ececec;
-      border-radius: 6px;
-      position: relative;
-    }
-    .xp-bar .xp-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #ff7e5f 60%, #feb47b 100%);
-      border-radius: 6px;
-      width: 38%;
-    }
-    .xp-bar .xp-label {
-      position: absolute;
-      right: 0;
-      top: -22px;
-      font-size: 0.9rem;
-      color: #b0b0b0;
-    }
-    .stats {
-      display: flex;
-      gap: 32px;
-      margin-top: 18px;
-    }
-    .stat {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px #ececec;
-      padding: 18px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 100px;
-    }
-    .stat .value {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #23223a;
-    }
-    .stat .label {
-      font-size: 1rem;
-      color: #b0b0b0;
-      margin-top: 4px;
-    }
-    /* Achievements & Inventory */
-    .bottom-section {
-      display: flex;
-      gap: 32px;
-      margin-top: 36px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 16px #ececec;
-      padding: 28px 32px 18px 32px;
-      flex: 1;
-      min-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .card-header h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-    .card-header .count {
-      background: #f5f6fa;
-      color: #ff7e5f;
-      border-radius: 8px;
-      padding: 2px 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #ececec;
-      border-radius: 6px;
-      margin-bottom: 12px;
-      position: relative;
-    }
-    .progress-bar .progress {
-      height: 100%;
-      background: linear-gradient(90deg, #ff7e5f 60%, #feb47b 100%);
-      border-radius: 6px;
-      width: 4%;
-    }
-    .progress-bar .progress.achievements {
-      width: 4%;
-    }
-    .progress-bar .progress.inventory {
-      width: 40%;
-      background: linear-gradient(90deg, #6ee7b7 60%, #fbc2eb 100%);
-    }
-    .items {
-      display: flex;
-      gap: 24px;
-      margin-bottom: 10px;
-    }
-    .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      min-width: 80px;
-    }
-    .item .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #f5f6fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.7rem;
-      margin-bottom: 4px;
-      box-shadow: 0 2px 8px #ececec;
-    }
-    .item .icon.medal1 { background: #e0e7ef; color: #7b61ff; }
-    .item .icon.medal2 { background: #e0f7fa; color: #00bcd4; }
-    .item .icon.medal3 { background: #fffde7; color: #ffd600; }
-    .item .icon.extra { background: #e0f7ef; color: #00b894; }
-    .item .icon.fifty { background: #fffbe7; color: #ffb300; }
-    .item .icon.popular { background: #ffe0f7; color: #e040fb; }
-    .item .label {
-      font-size: 1rem;
-      color: #23223a;
-      font-weight: 500;
-      text-align: center;
-    }
-    .card-footer {
-      text-align: right;
-      color: #b0b0b0;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-    @media (max-width: 1100px) {
-      .main { padding: 24px 8px 0 8px; }
-      .bottom-section { flex-direction: column; gap: 18px; }
-      .card { min-width: unset; }
-    }
-    @media (max-width: 700px) {
-      .container { flex-direction: column; }
-      .sidebar { width: 100%; flex-direction: row; justify-content: space-between; padding: 12px 0; }
-      .main { padding: 12px 4px 0 4px; }
-      .profile-header { flex-direction: column; gap: 12px; }
-      .bottom-section { flex-direction: column; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/Main.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
+
 <body>
-  <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">
-        <span style="font-size:1.5rem;">&#128187;</span>
-        Elementary
-      </div>
-      <nav>
-        <ul>
-          <li><span>&#128200;</span>Leaderboard</li>
-          <li><span>&#128722;</span>Shop</li>
-          <li><span>&#128222;</span>Support</li>
-          <li class="active"><span>&#128276;</span>Notification</li>
-        </ul>
-      </nav>
-      <div class="user">
-        <div class="user-img">JW</div>
-        <span>John W.</span>
-      </div>
-    </aside>
-    <!-- Main Content -->
-    <main class="main">
-      <div class="top-bar">
-        <button>Join Lobby</button>
-        <button>Start Quiz</button>
-        <div class="avatars">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="user1">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="user2">
-          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="user3">
+    <div class="nav-container">
+        <div class="container-fluid d-flex justify-content-center align-items-center gap-2">
+            <div class="logo-box">
+                <div class="elements">
+                    <img src="img/disability-q-krbilol3ttk5gtd1wfvlvl.webp" alt="Logo of Quizeeriya application"
+                        class="logo">
+                </div>
+            </div>
+            <div class="navbar">
+                <nav class="w-100">
+                    <div class="navbar-content">
+                        <h3>Quizeeriya</h3>
+                        <p class="welcome-message">Welcome to Quizeeriya <b id="user-name">User</b>!</p>
+                    </div>
+                </nav>
+            </div>
         </div>
-      </div>
-      <div class="profile-header">
-        <div class="profile-pic">
-          <span style="font-size:3rem;">&#128100;</span>
-          <span class="badge">&#128293;</span>
-        </div>
-        <div class="profile-info">
-          <h2>John Willis</h2>
-          <div class="subtitle">Bonus Booster, 24 lv</div>
-          <div class="xp-bar">
-            <div class="xp-progress"></div>
-            <span class="xp-label">3000 / 8000 XP</span>
-          </div>
-          <div class="stats">
-            <div class="stat">
-              <span class="value">27</span>
-              <span class="label">Game Wins</span>
+    </div>
+    <div class="container-fluid d-flex gap-2 overflow-hidden">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-item">
+                    <a href="index.html" class="sidebar-link"><img src="img/home_6755861.png" alt=""></a>
+                </div>
+                <div class="sidebar-item">
+                    <a href="quiz.html" class="sidebar-link"><img src="img/question.png" alt=""></a>
+                </div>
+                <div class="sidebar-item">
+                    <a href="Profile.html" class="sidebar-link"><img src="img/profile.webp" alt=""></a>
+                </div>
             </div>
-            <div class="stat">
-              <span class="value">910</span>
-              <span class="label">Highest Score</span>
+        </aside>
+        <main class="main">
+            <div class="profile-header">
+                <div class="profile-pic">
+                    <span style="font-size:3rem;">&#128100;</span>
+                    <span class="badge">&#128293;</span>
+                </div>
+                <div class="profile-info">
+                    <h2>John Willis</h2>
+                    <div class="subtitle">Bonus Booster, 24 lv</div>
+                    <div class="xp-bar">
+                        <div class="xp-progress"></div>
+                        <span class="xp-label">3000 / 8000 XP</span>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="value">27</span>
+                            <span class="label">Game Wins</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">910</span>
+                            <span class="label">Highest Score</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">218</span>
+                            <span class="label">Correct Answers</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat">
-              <span class="value">218</span>
-              <span class="label">Correct Answers</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bottom-section">
-        <!-- Achievements -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Achievements</h3>
-            <span class="count">8</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress achievements"></div>
-          </div>
-          <div class="items">
-            <div class="item">
-              <div class="icon medal1">&#127941;</div>
-              <div class="label">Comeback</div>
-            </div>
-            <div class="item">
-              <div class="icon medal2">&#127942;</div>
-              <div class="label">Lucky</div>
-            </div>
-            <div class="item">
-              <div class="icon medal3">&#127943;</div>
-              <div class="label">Leader</div>
-            </div>
-          </div>
-          <div class="card-footer">View all</div>
-        </div>
-        <!-- Inventory -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Inventory</h3>
-            <span class="count">4</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress inventory"></div>
-          </div>
-          <div class="items">
-            <div class="item">
-              <div class="icon extra">&#9200;</div>
-              <div class="label">Extra time</div>
-            </div>
-            <div class="item">
-              <div class="icon fifty">&#11088;</div>
-              <div class="label">50/50</div>
-            </div>
-            <div class="item">
-              <div class="icon popular">&#128101;</div>
-              <div class="label">Most popular<br>answer</div>
-            </div>
-          </div>
-          <div class="card-footer">View all</div>
-        </div>
-      </div>
-    </main>
-  </div>
+            
+        </main>
+    </div>
 </body>
+<script src="js/bootstrap.js"></script>
+<script>
+    // Dynamically set the user's name
+    document.getElementById('user-name').textContent = "Harsh";
+</script>
+
 </html>

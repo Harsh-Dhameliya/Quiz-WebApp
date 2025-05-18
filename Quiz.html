@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz App</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 id="quiz-title">Quiz</h2>
+    <div id="quiz-box">
+        <div class="question" id="question"></div>
+        <ul class="options" id="options"></ul>
+        <button id="next-btn" disabled>Next</button>
+        <div class="result" id="result"></div>
+    </div>
+</div>
+<script>
+     const topics = [
+        {
+            name: "HTML Basics",
+            questions: [
+                {
+                    question: "What does HTML stand for?",
+                    options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Tool Multi Language"],
+                    answer: 0
+                },
+                {
+                    question: "Which tag is used for the largest heading?",
+                    options: ["<h6>", "<heading>", "<h1>", "<head>"],
+                    answer: 2
+                }
+            ]
+        },
+        {
+            name: "CSS Fundamentals",
+            questions: [
+                {
+                    question: "Which property is used to change the background color?",
+                    options: ["color", "background-color", "bgcolor", "background"],
+                    answer: 1
+                },
+                {
+                    question: "How do you select an element with id 'demo'?",
+                    options: [".demo", "#demo", "demo", "*demo"],
+                    answer: 1
+                }
+            ]
+        }
+    ];
+
+    // Get topic index from URL query (?topic=0)
+    function getTopicIndex() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('topic')) || 0;
+    }
+
+    const topicIndex = getTopicIndex();
+    const topic = topics[topicIndex] || topics[0];
+    const questions = topic.questions;
+
+    let current = 0;
+    let score = 0;
+
+    document.getElementById('quiz-title').textContent = topic.name;
+
+    function loadQuestion() {
+        document.getElementById('result').textContent = '';
+        const q = questions[current];
+        document.getElementById('question').textContent = q.question;
+        const optionsList = document.getElementById('options');
+        optionsList.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.textContent = opt;
+            btn.onclick = () => selectOption(idx);
+            btn.type = "button";
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+        });
+        document.getElementById('next-btn').disabled = true;
+    }
+
+    function selectOption(idx) {
+        const q = questions[current];
+        const optionsBtns = document.querySelectorAll('#options button');
+        optionsBtns.forEach((btn, i) => {
+            btn.disabled = true;
+            if (i === q.answer) btn.style.background = "#28a745";
+            if (i === idx && i !== q.answer) btn.style.background = "#dc3545";
+        });
+        if (idx === q.answer) {
+            score++;
+            document.getElementById('result').textContent = "Correct!";
+        } else {
+            document.getElementById('result').textContent = "Wrong!";
+        }
+        document.getElementById('next-btn').disabled = false;
+    }
+
+    document.getElementById('next-btn').onclick = function() {
+        current++;
+        if (current < questions.length) {
+            loadQuestion();
+        } else {
+            showScore();
+        }
+    };
+
+    function showScore() {
+        document.getElementById('quiz-box').innerHTML = `<h3>Quiz Complete!</h3>
+            <p>Your score: ${score} / ${questions.length}</p>`;
+    }
+
+    loadQuestion();
+   
+</script>
+</body>
+</html>

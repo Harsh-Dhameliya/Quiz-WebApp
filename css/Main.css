@@ -20,7 +20,7 @@
 }
 body {
   background-color: #f4f0e0;
-  cursor: url(../img/disability-q-krbilol3ttk5gtd1wfvlvl.png) , auto;
+  cursor: url(../img/disability-q-krbilol3ttk5gtd1wfvlvl.png), auto;
   /* cursor: pointer; */
 }
 .nav-container {
@@ -109,5 +109,53 @@ body {
 }
 .body-container {
   width: 92.61%;
+  margin-top: 0.7rem;
   /* overflow-y:; */
+}
+
+.quiz-icon {
+  width: 55px;
+  height: 55px;
+  background: #ed9614;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.card-img-top {
+  width: 35px;
+}
+.card {
+  padding: 15px;
+  background-color: transparent;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+}
+.card-title{
+  color: #504f4a;
+  margin: 0;
+}
+.card-body{
+  padding: 11px 0 0 0 !important;
+}
+
+.bn32 {
+  border-color: #ffffff;
+  padding: 0.6em 2.3em;
+  cursor: pointer;
+  border: 1.5px solid #8c8484db;
+  border-radius: 10px;
+  font-size: 1em;
+  color: black;
+  background: transparent;
+  background-image: linear-gradient(45deg, transparent 50%, #000000 50%);
+  background-position: 25%;
+  background-size: 400%;
+  -webkit-transition: background 500ms ease-in-out, color 500ms ease-in-out;
+  transition: background 500ms ease-in-out, color 500ms ease-in-out;
+}
+
+.bn32:hover {
+  color: #ffffff;
+  background-position: 100%;
 }
